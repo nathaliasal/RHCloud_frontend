@@ -1,0 +1,101 @@
+.features {
+  padding: 7rem 2rem;
+  position: relative;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 229, 204, 0.2), transparent);
+}
+
+.features__container {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.features__header {
+  margin-bottom: 4rem;
+  max-width: 600px;
+}
+
+/* ── Grid ── */
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+@media (max-width: 960px) { .features__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .features__grid { grid-template-columns: 1fr; } }
+
+/* ── Card ── */
+.feature-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid rgba(237, 244, 255, 0.055);
+  border-radius: 16px;
+  padding: 1.75rem 1.75rem 2rem;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:hover {
+  border-color: rgba(0, 229, 204, 0.22);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(0, 229, 204, 0.08);
+}
+
+/* Spotlight layer — revealed via JS class */
+.feature-card__spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0, 229, 204, 0.1),
+    transparent 70%
+  );
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.feature-card--lit .feature-card__spotlight {
+  opacity: 1;
+}
+
+.feature-card__icon {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
+  background: rgba(0, 229, 204, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.feature-card__icon svg { width: 22px; height: 22px; }
+
+.feature-card__title {
+  position: relative;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.55rem;
+  letter-spacing: -0.01em;
+}
+
+.feature-card__desc {
+  position: relative;
+  font-size: 0.875rem;
+  color: rgba(237, 244, 255, 0.48);
+  line-height: 1.68;
+}

@@ -1,0 +1,164 @@
+.cta {
+  position: relative;
+  padding: 8rem 2rem 4rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 229, 204, 0.2), transparent);
+}
+
+.cta__orb {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 204, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  filter: blur(50px);
+  opacity: 0.12;
+}
+
+.cta__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 680px;
+}
+
+.cta__title {
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: var(--color-text);
+  margin-bottom: 1.25rem;
+}
+
+.cta__subtitle {
+  font-size: 1.05rem;
+  color: rgba(237, 244, 255, 0.5);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+}
+
+/* ── Magnetic button wrapper ── */
+.cta__actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.cta__btn {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2.25rem;
+  font-size: 1rem;
+  will-change: transform;
+}
+
+/* Shimmer sweep */
+.cta__shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+/* ── Trust badges ── */
+.cta__badges {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta__badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: rgba(237, 244, 255, 0.38);
+  font-weight: 500;
+}
+
+.cta__badge svg { color: var(--color-accent); flex-shrink: 0; }
+
+/* ── Particle ── */
+.cta__particle {
+  position: fixed;
+  top: 0; left: 0;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px var(--color-accent);
+}
+
+/* ── Footer ── */
+.cta__footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 6rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(237, 244, 255, 0.06);
+  width: 100%;
+  max-width: 1150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cta__footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.cta__footer-icon {
+  width: 30px; height: 30px;
+  border-radius: 7px;
+  background: linear-gradient(145deg, #00E5CC, #009688);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 900;
+  color: #06131E;
+  letter-spacing: 0.04em;
+}
+
+.cta__footer-icon span {
+  display: inline-block;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #06131E;
+  margin-left: 1px;
+  align-self: flex-end;
+  margin-bottom: 3px;
+}
+
+.cta__footer-copy {
+  font-size: 0.8rem;
+  color: rgba(237, 244, 255, 0.3);
+}

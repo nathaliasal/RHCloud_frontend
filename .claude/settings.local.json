@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(unzip -l \"c:/Users/user/Downloads/RHCloud-handoff.zip\")",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}

@@ -1,0 +1,305 @@
+.showcase {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.showcase::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 229, 204, 0.18), transparent);
+}
+
+.showcase__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  width: 100%;
+}
+
+/* ── Left: texts ── */
+.showcase__text-stack {
+  position: relative;
+}
+
+.showcase__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  will-change: opacity, transform;
+}
+
+.showcase__text--1 {
+  position: relative; /* so the stack has height */
+}
+
+.showcase__num {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.showcase__title {
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.showcase__desc {
+  font-size: 1.05rem;
+  color: rgba(237, 244, 255, 0.5);
+  line-height: 1.75;
+  max-width: 420px;
+}
+
+/* Step dots */
+.showcase__dots {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 10rem;
+}
+
+.showcase__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+/* ── Right: visuals ── */
+.showcase__visuals {
+  position: relative;
+  height: 400px;
+}
+
+.showcase__vis {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  will-change: opacity, transform;
+}
+
+.showcase__panel {
+  width: 100%;
+  background: var(--color-surface);
+  border: 1px solid rgba(237, 244, 255, 0.07);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+}
+
+.showcase__panel-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(237, 244, 255, 0.35);
+  margin-bottom: 1.25rem;
+}
+
+/* ── Scene 1: companies ── */
+.showcase__company-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.showcase__company-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(237, 244, 255, 0.04);
+  border: 1px solid rgba(237, 244, 255, 0.07);
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(237, 244, 255, 0.75);
+}
+
+.showcase__company-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(0, 229, 204, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.showcase__company-tag {
+  margin-left: auto;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--color-success);
+  background: rgba(74, 222, 128, 0.1);
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
+}
+
+/* ── Scene 2: contract ── */
+.showcase__contract {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.showcase__contract-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(237, 244, 255, 0.07);
+}
+
+.showcase__contract-chip {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: rgba(0, 229, 204, 0.1);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+}
+
+.showcase__contract-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.showcase__contract-key {
+  font-size: 0.72rem;
+  color: rgba(237, 244, 255, 0.4);
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.showcase__contract-val {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(237, 244, 255, 0.08);
+}
+
+.showcase__contract-action {
+  padding-top: 0.75rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.showcase__contract-btn {
+  display: inline-flex;
+  padding: 0.55rem 1.1rem;
+  background: var(--color-accent);
+  color: #06131E;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: default;
+  box-shadow: 0 0 20px rgba(0, 229, 204, 0.35);
+}
+
+/* ── Scene 3: approvals ── */
+.showcase__approvals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.showcase__approval {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.65rem;
+  background: rgba(237, 244, 255, 0.03);
+  border: 1px solid rgba(237, 244, 255, 0.06);
+  border-radius: 10px;
+}
+
+.showcase__approval-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 229, 204, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.showcase__approval-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase__approval-info span:first-child {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(237, 244, 255, 0.85);
+}
+
+.showcase__approval-info span:last-child {
+  font-size: 0.68rem;
+  color: rgba(237, 244, 255, 0.38);
+}
+
+.showcase__approval-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.showcase__btn-approve,
+.showcase__btn-reject {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showcase__btn-approve {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--color-success);
+}
+
+.showcase__btn-reject {
+  background: rgba(255, 107, 107, 0.12);
+  color: var(--color-error);
+}
+
+/* ── Mobile: hide pinned section ── */
+@media (max-width: 768px) {
+  .showcase { display: none; }
+}
