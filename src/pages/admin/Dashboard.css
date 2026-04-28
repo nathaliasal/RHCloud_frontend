@@ -1,0 +1,396 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Stat cards ── */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.dash-stat-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+}
+
+.dash-stat-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.dash-stat-card__icon {
+  display: flex;
+  align-items: center;
+  color: var(--color-accent);
+  opacity: 0.85;
+}
+
+.dash-stat-card__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(237, 244, 255, 0.45);
+  margin-bottom: 0.3rem;
+}
+
+.dash-stat-card__value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* ── Badges ── */
+.dash-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dash-badge--success {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--color-success);
+}
+
+.dash-badge--warning {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--color-warning);
+}
+
+.dash-badge--error {
+  background: rgba(255, 107, 107, 0.12);
+  color: var(--color-error);
+}
+
+.dash-badge--accent {
+  background: rgba(0, 229, 204, 0.12);
+  color: var(--color-accent);
+}
+
+/* ── Middle row: chart + activity ── */
+.dash-row {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1rem;
+}
+
+/* ── Chart card ── */
+.dash-chart-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.dash-chart-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.dash-chart-card__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.2rem;
+}
+
+.dash-chart-card__sub {
+  font-size: 0.72rem;
+  color: rgba(237, 244, 255, 0.35);
+}
+
+.dash-chart-toggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 7px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.dash-chart-toggle__btn {
+  padding: 0.3rem 0.75rem;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: rgba(237, 244, 255, 0.45);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dash-chart-toggle__btn--active {
+  background: var(--color-accent);
+  color: var(--color-background);
+}
+
+.dash-chart__body {
+  width: 100%;
+}
+
+.dash-chart__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Activity card ── */
+.dash-activity-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.dash-activity-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.dash-activity-card__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.dash-activity-card__link {
+  background: transparent;
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  font-family: var(--font-primary);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0;
+}
+
+.dash-activity__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.dash-activity__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  position: relative;
+}
+
+.dash-activity__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dash-activity__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.dash-activity__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.dash-activity__text {
+  font-size: 0.76rem;
+  color: rgba(237, 244, 255, 0.7);
+  line-height: 1.45;
+  margin-bottom: 0.2rem;
+}
+
+.dash-activity__text strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.dash-activity__link {
+  color: var(--color-accent);
+}
+
+.dash-activity__time {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: rgba(237, 244, 255, 0.25);
+  letter-spacing: 0.06em;
+}
+
+.dash-activity__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+}
+
+.dash-activity__dot--success { background: var(--color-success); }
+.dash-activity__dot--warning { background: var(--color-warning); }
+.dash-activity__dot--accent  { background: var(--color-accent); }
+.dash-activity__dot--error   { background: var(--color-error); }
+
+/* ── Employee table ── */
+.dash-table-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.dash-table-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.dash-table-card__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.dash-table-card__cta {
+  padding: 0.45rem 1rem;
+  background: var(--color-accent);
+  color: var(--color-background);
+  border: none;
+  border-radius: 7px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: opacity 0.15s;
+}
+
+.dash-table-card__cta:hover {
+  opacity: 0.88;
+}
+
+.dash-table-wrap {
+  overflow-x: auto;
+}
+
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dash-table thead th {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(237, 244, 255, 0.35);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dash-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.12s;
+}
+
+.dash-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.dash-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dash-table tbody td {
+  padding: 0.85rem 0.75rem;
+  font-size: 0.8rem;
+  color: rgba(237, 244, 255, 0.7);
+  vertical-align: middle;
+}
+
+.dash-table__employee {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.dash-table__emp-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.dash-table__emp-name {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.dash-table__emp-email {
+  display: block;
+  font-size: 0.68rem;
+  color: rgba(237, 244, 255, 0.35);
+}
+
+.dash-table__dept,
+.dash-table__contract {
+  color: rgba(237, 244, 255, 0.6);
+}
+
+.dash-table__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: rgba(237, 244, 255, 0.35);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.dash-table__action-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--color-text);
+}
