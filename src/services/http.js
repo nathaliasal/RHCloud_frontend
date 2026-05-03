@@ -6,20 +6,24 @@ const AUTH_KEY = 'rhcloud.web.auth'
 export const http = axios.create({ baseURL: BASE_URL })
 
 http.interceptors.request.use((config) => {
-  const raw = localStorage.getItem(AUTH_KEY)
-  if (raw) {
-    const { accessToken } = JSON.parse(raw)
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`
-      return config
+  try {
+    const raw = localStorage.getItem(AUTH_KEY)
+    if (raw) {
+      const parsed = JSON.parse(raw)
+      // Zustand persist wraps state as { state: { accessToken, ... }, version: 0 }
+      const { accessToken } = parsed?.state ?? parsed
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`
+        return config
+      }
     }
-  }
-  // fallback: token written during login before Zustand session is set
-  const rawTokens = localStorage.getItem('rhcloud.tokens')
-  if (rawTokens) {
-    const { accessToken } = JSON.parse(rawTokens)
-    if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`
-  }
+    // fallback: token written during login before Zustand session is set
+    const rawTokens = localStorage.getItem('rhcloud.tokens')
+    if (rawTokens) {
+      const { accessToken } = JSON.parse(rawTokens)
+      if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`
+    }
+  } catch (_) {}
   return config
 })
 

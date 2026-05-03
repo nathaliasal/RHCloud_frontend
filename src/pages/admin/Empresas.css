@@ -1,0 +1,549 @@
+.emp-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Header ── */
+.emp-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.emp-header__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237, 244, 255, 0.35);
+}
+
+.emp-header__sep {
+  color: rgba(237, 244, 255, 0.2);
+}
+
+.emp-header__crumb-active {
+  color: var(--color-accent);
+}
+
+.emp-header__row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.emp-header__title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  line-height: 1.15;
+  margin-bottom: 0.3rem;
+}
+
+.emp-header__sub {
+  font-size: 0.82rem;
+  color: rgba(237, 244, 255, 0.45);
+  line-height: 1.5;
+}
+
+.emp-btn-add {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  background: var(--color-accent);
+  color: var(--color-background);
+  border: none;
+  border-radius: 9px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.emp-btn-add:hover {
+  opacity: 0.88;
+}
+
+/* ── Filters ── */
+.emp-filters {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.emp-filters__search {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 9px;
+  padding: 0.6rem 0.9rem;
+  color: rgba(237, 244, 255, 0.3);
+}
+
+.emp-filters__search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.75rem;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  width: 100%;
+}
+
+.emp-filters__search-input::placeholder {
+  color: rgba(237, 244, 255, 0.25);
+  font-size: 0.72rem;
+}
+
+.emp-filters__control {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 9px;
+  padding: 0.6rem 0.9rem;
+  color: rgba(237, 244, 255, 0.4);
+  position: relative;
+}
+
+.emp-filters__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(237, 244, 255, 0.45);
+  white-space: nowrap;
+}
+
+.emp-filters__select {
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.75rem;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  cursor: pointer;
+  padding-right: 0.1rem;
+}
+
+.emp-filters__select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.emp-filters__chevron {
+  color: rgba(237, 244, 255, 0.35);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* ── Table card ── */
+.emp-table-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.emp-table-wrap {
+  overflow-x: auto;
+}
+
+.emp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.emp-table thead th {
+  font-size: 0.63rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: rgba(237, 244, 255, 0.3);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
+}
+
+.emp-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.12s;
+}
+
+.emp-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.emp-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.emp-table__row--clickable {
+  cursor: pointer;
+}
+
+.emp-table tbody td {
+  padding: 0.9rem 1rem;
+  font-size: 0.8rem;
+  color: rgba(237, 244, 255, 0.65);
+  vertical-align: middle;
+}
+
+/* ── Logo cell ── */
+.emp-table__logo-cell {
+  width: 56px;
+  padding-right: 0.5rem !important;
+}
+
+.emp-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.emp-logo__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.emp-logo--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ── Company name cell ── */
+.emp-table__name {
+  display: block;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.15rem;
+}
+
+.emp-table__address {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: rgba(237, 244, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── TID cell ── */
+.emp-table__tid {
+  font-size: 0.75rem !important;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(237, 244, 255, 0.5) !important;
+  white-space: nowrap;
+}
+
+/* ── Status badge ── */
+.emp-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.emp-badge--success {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--color-success);
+}
+
+.emp-badge--warning {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--color-warning);
+}
+
+.emp-badge--error {
+  background: rgba(255, 107, 107, 0.12);
+  color: var(--color-error);
+}
+
+/* ── Action button ── */
+.emp-table__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  color: rgba(237, 244, 255, 0.3);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.emp-table__action-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--color-text);
+}
+
+/* ── Empty / loading / error states ── */
+.emp-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  font-size: 0.82rem;
+  color: rgba(237, 244, 255, 0.35);
+}
+
+.emp-state--error {
+  color: var(--color-error);
+}
+
+.emp-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(0, 229, 204, 0.15);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: emp-spin 0.7s linear infinite;
+}
+
+@keyframes emp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Pagination ── */
+.emp-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.emp-pagination__info {
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: rgba(237, 244, 255, 0.3);
+  text-transform: uppercase;
+}
+
+.emp-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.emp-pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 0.4rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: rgba(237, 244, 255, 0.5);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.emp-pagination__btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.emp-pagination__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.emp-pagination__btn--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-background);
+}
+
+.emp-pagination__btn--active:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: var(--color-background);
+}
+
+.emp-pagination__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  font-size: 0.78rem;
+  color: rgba(237, 244, 255, 0.25);
+}
+
+/* ── Inline row action buttons ── */
+.emp-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.emp-row-btn {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.emp-row-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.emp-row-btn--warning {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.25);
+  color: var(--color-warning);
+}
+
+.emp-row-btn--warning:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.emp-row-btn--success {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.25);
+  color: var(--color-success);
+}
+
+.emp-row-btn--success:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.emp-row-btn--danger {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.25);
+  color: var(--color-error);
+}
+
+.emp-row-btn--danger:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+/* ── Delete confirm dialog ── */
+.emp-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.emp-confirm {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: 1.75rem;
+  max-width: 380px;
+  width: 90%;
+}
+
+.emp-confirm__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.6rem;
+}
+
+.emp-confirm__body {
+  font-size: 0.82rem;
+  color: rgba(237, 244, 255, 0.55);
+  line-height: 1.55;
+  margin-bottom: 1.4rem;
+}
+
+.emp-confirm__body strong {
+  color: var(--color-text);
+}
+
+.emp-confirm__actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}
+
+.emp-confirm__btn {
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.emp-confirm__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.emp-confirm__btn--cancel {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(237, 244, 255, 0.7);
+}
+
+.emp-confirm__btn--cancel:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.emp-confirm__btn--danger {
+  background: var(--color-error);
+  color: #fff;
+}
+
+.emp-confirm__btn--danger:hover:not(:disabled) {
+  opacity: 0.88;
+}
