@@ -301,6 +301,54 @@ const mutation = useMutation({
 })
 ```
 
+### API validation errors in forms
+
+The backend returns validation errors in this shape:
+
+```json
+{
+  "detail": [
+    {
+      "type": "value_error",
+      "loc": ["body", "phone"],
+      "msg": "Value error, El teléfono debe contener solo números y tener 10 dígitos.",
+      "input": "+57 300 111 0001"
+    }
+  ]
+}
+```
+
+In every `useMutation` that submits a form, map these back to `react-hook-form` via `setError` so they appear inline under the offending field:
+
+```jsx
+const { register, handleSubmit, setError, formState: { errors } } = useForm()
+
+const mutation = useMutation({
+  mutationFn: submitData,
+  onError: (err) => {
+    const detail = err.response?.data?.detail
+    if (Array.isArray(detail)) {
+      detail.forEach(({ loc, msg }) => {
+        const field = loc[loc.length - 1]
+        if (typeof field === 'string') setError(field, { message: msg })
+      })
+    }
+  },
+})
+```
+
+Every form field **must** render its error, including optional fields that the API can still reject:
+
+```jsx
+<input
+  className={`my-input${errors.phone ? ' my-input--err' : ''}`}
+  {...register('phone')}
+/>
+{errors.phone && <span className="my-error">{errors.phone.message}</span>}
+```
+
+Never skip the error display on a field just because it has no client-side validation rule.
+
 ### Notification polling
 
 ```jsx
