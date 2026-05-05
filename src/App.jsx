@@ -14,6 +14,10 @@ const CompleteProfile = lazy(() => import('@/pages/auth/CompleteProfile'))
 const Dashboard       = lazy(() => import('@/pages/admin/Dashboard'))
 const Empresas        = lazy(() => import('@/pages/admin/Empresas'))
 const EmpresaDetalle  = lazy(() => import('@/pages/admin/EmpresaDetalle'))
+const MiPerfil        = lazy(() => import('@/pages/admin/MiPerfil'))
+const Notificaciones  = lazy(() => import('@/pages/admin/Notificaciones'))
+const Permisos        = lazy(() => import('@/pages/admin/Permisos'))
+const Vacaciones      = lazy(() => import('@/pages/admin/Vacaciones'))
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,6 +58,38 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <EmpresaDetalle />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/vacaciones',
+    element: (
+      <ProtectedRoute>
+        <Vacaciones />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/permisos',
+    element: (
+      <ProtectedRoute>
+        <Permisos />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/notificaciones',
+    element: (
+      <ProtectedRoute>
+        <Notificaciones />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/mi-perfil',
+    element: (
+      <ProtectedRoute>
+        <MiPerfil />
       </ProtectedRoute>
     ),
   },
