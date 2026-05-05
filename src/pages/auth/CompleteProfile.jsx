@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { gsap } from 'gsap'
 import { getDocumentTypes, getGenders, createPerson } from '@/services/personas'
+import { verifyUser } from '@/services/usuarios'
 import { useAuthStore } from '@/stores/auth'
 import './CompleteProfile.css'
 
@@ -38,7 +39,11 @@ export default function CompleteProfile() {
   }, [])
 
   const mutation = useMutation({
-    mutationFn: createPerson,
+    mutationFn: async (body) => {
+      const person = await createPerson(body)
+      await verifyUser()
+      return person
+    },
     onSuccess: (data) => {
       setUser({ ...user, is_verified: true, id_employee: data.id })
       navigate('/dashboard', { replace: true })

@@ -26,6 +26,28 @@ const NAV_ITEMS = [
     ),
   },
   {
+    to: '/usuarios',
+    label: 'Gestión de Usuarios',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Empleados',
+    disabled: true,
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+  },
+  {
     to: '/contratos/plantillas',
     label: 'Plantillas de Contratos',
     icon: (
@@ -34,18 +56,6 @@ const NAV_ITEMS = [
         <polyline points="14 2 14 8 20 8" />
         <line x1="16" y1="13" x2="8" y2="13" />
         <line x1="16" y1="17" x2="8" y2="17" />
-      </svg>
-    ),
-  },
-  {
-    to: '/usuarios',
-    label: 'Empleados',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
   },
@@ -108,19 +118,27 @@ export function AdminLayout({ children }) {
         </div>
 
         <nav className="admin-sidebar__nav">
-          {NAV_ITEMS.map(({ to, label, icon }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={to === '/dashboard'}
-              className={({ isActive }) =>
-                `admin-sidebar__link${isActive ? ' admin-sidebar__link--active' : ''}`
-              }
-            >
-              <span className="admin-sidebar__link-icon">{icon}</span>
-              <span className="admin-sidebar__link-label">{label}</span>
-            </NavLink>
-          ))}
+          {NAV_ITEMS.map(({ to, label, icon, disabled }) =>
+            disabled ? (
+              <span key={label} className="admin-sidebar__link admin-sidebar__link--disabled">
+                <span className="admin-sidebar__link-icon">{icon}</span>
+                <span className="admin-sidebar__link-label">{label}</span>
+                <span className="admin-sidebar__link-soon">Próximamente</span>
+              </span>
+            ) : (
+              <NavLink
+                key={to}
+                to={to}
+                end={to === '/dashboard'}
+                className={({ isActive }) =>
+                  `admin-sidebar__link${isActive ? ' admin-sidebar__link--active' : ''}`
+                }
+              >
+                <span className="admin-sidebar__link-icon">{icon}</span>
+                <span className="admin-sidebar__link-label">{label}</span>
+              </NavLink>
+            )
+          )}
         </nav>
 
         <button className="admin-sidebar__logout" onClick={handleLogout}>

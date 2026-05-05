@@ -18,6 +18,8 @@ const MiPerfil        = lazy(() => import('@/pages/admin/MiPerfil'))
 const Notificaciones  = lazy(() => import('@/pages/admin/Notificaciones'))
 const Permisos        = lazy(() => import('@/pages/admin/Permisos'))
 const Vacaciones      = lazy(() => import('@/pages/admin/Vacaciones'))
+const Usuarios        = lazy(() => import('@/pages/admin/Usuarios'))
+const UsuarioDetalle  = lazy(() => import('@/pages/admin/UsuarioDetalle'))
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -90,6 +92,22 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <MiPerfil />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/usuarios',
+    element: (
+      <ProtectedRoute>
+        <Usuarios />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/usuarios/:id',
+    element: (
+      <ProtectedRoute>
+        <UsuarioDetalle />
       </ProtectedRoute>
     ),
   },

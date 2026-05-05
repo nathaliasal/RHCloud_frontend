@@ -1,0 +1,231 @@
+.ud-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Loading / error states ── */
+.ud-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 4rem 1.5rem;
+  font-size: 0.82rem;
+  color: rgba(237, 244, 255, 0.35);
+}
+
+.ud-state--error { color: var(--color-error); }
+
+.ud-spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(0, 229, 204, 0.15);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: ud-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes ud-spin { to { transform: rotate(360deg); } }
+
+/* ── Breadcrumb ── */
+.ud-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237, 244, 255, 0.35);
+}
+
+.ud-breadcrumb__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 6px;
+  color: rgba(237, 244, 255, 0.45);
+  cursor: pointer;
+  margin-right: 0.15rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ud-breadcrumb__back:hover {
+  background: rgba(0, 229, 204, 0.1);
+  color: var(--color-accent);
+}
+
+.ud-breadcrumb__item {
+  cursor: pointer;
+  transition: color 0.12s;
+}
+
+.ud-breadcrumb__item:hover { color: var(--color-text); }
+
+.ud-breadcrumb__sep { color: rgba(237, 244, 255, 0.2); }
+
+.ud-breadcrumb__current { color: var(--color-accent); }
+
+/* ── Hero ── */
+.ud-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ud-hero__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.ud-hero__info { flex: 1; min-width: 0; }
+
+.ud-hero__name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.25rem;
+}
+
+.ud-hero__email {
+  font-size: 0.82rem;
+  color: rgba(237, 244, 255, 0.45);
+  margin-bottom: 0.65rem;
+}
+
+.ud-hero__badges {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+/* ── Badges ── */
+.ud-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.65rem;
+  border-radius: 5px;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ud-badge--success {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--color-success);
+}
+
+.ud-badge--error {
+  background: rgba(255, 107, 107, 0.12);
+  color: var(--color-error);
+}
+
+.ud-badge--accent {
+  background: rgba(0, 229, 204, 0.12);
+  color: var(--color-accent);
+}
+
+.ud-badge--muted {
+  background: rgba(237, 244, 255, 0.06);
+  color: rgba(237, 244, 255, 0.3);
+}
+
+/* ── Section title ── */
+.ud-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+/* ── Info sections ── */
+.ud-section {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+/* ── Info cards grid ── */
+.ud-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .ud-info-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .ud-info-grid { grid-template-columns: 1fr; }
+}
+
+.ud-info-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1rem 1.1rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ud-info-card__icon {
+  color: var(--color-accent);
+  opacity: 0.7;
+  display: flex;
+  margin-bottom: 0.1rem;
+}
+
+.ud-info-card__label {
+  font-size: 0.63rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(237, 244, 255, 0.3);
+}
+
+.ud-info-card__value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  word-break: break-word;
+}
+
+/* ── Account section ── */
+.ud-account-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+@media (max-width: 500px) {
+  .ud-account-grid { grid-template-columns: 1fr; }
+}
