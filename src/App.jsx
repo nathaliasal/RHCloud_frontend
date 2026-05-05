@@ -14,6 +14,8 @@ const CompleteProfile = lazy(() => import('@/pages/auth/CompleteProfile'))
 const Dashboard       = lazy(() => import('@/pages/admin/Dashboard'))
 const Empresas        = lazy(() => import('@/pages/admin/Empresas'))
 const EmpresaDetalle  = lazy(() => import('@/pages/admin/EmpresaDetalle'))
+const Usuarios        = lazy(() => import('@/pages/admin/Usuarios'))
+const UsuarioDetalle  = lazy(() => import('@/pages/admin/UsuarioDetalle'))
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,6 +56,22 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <EmpresaDetalle />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/usuarios',
+    element: (
+      <ProtectedRoute>
+        <Usuarios />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/usuarios/:id',
+    element: (
+      <ProtectedRoute>
+        <UsuarioDetalle />
       </ProtectedRoute>
     ),
   },

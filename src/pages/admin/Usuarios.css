@@ -1,0 +1,517 @@
+.usr-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Header ── */
+.usr-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.usr-header__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237, 244, 255, 0.35);
+}
+
+.usr-header__sep {
+  color: rgba(237, 244, 255, 0.2);
+}
+
+.usr-header__crumb-active {
+  color: var(--color-accent);
+}
+
+.usr-header__row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.usr-header__title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  line-height: 1.15;
+  margin-bottom: 0.3rem;
+}
+
+.usr-header__sub {
+  font-size: 0.82rem;
+  color: rgba(237, 244, 255, 0.45);
+  line-height: 1.5;
+}
+
+.usr-btn-add {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  background: var(--color-accent);
+  color: var(--color-background);
+  border: none;
+  border-radius: 9px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.usr-btn-add:hover {
+  opacity: 0.88;
+}
+
+/* ── Filters ── */
+.usr-filters {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.usr-filters__search {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 9px;
+  padding: 0.6rem 0.9rem;
+  color: rgba(237, 244, 255, 0.3);
+}
+
+.usr-filters__search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.75rem;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  width: 100%;
+}
+
+.usr-filters__search-input::placeholder {
+  color: rgba(237, 244, 255, 0.25);
+  font-size: 0.72rem;
+}
+
+.usr-filters__control {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 9px;
+  padding: 0.6rem 0.9rem;
+  color: rgba(237, 244, 255, 0.4);
+  position: relative;
+}
+
+.usr-filters__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(237, 244, 255, 0.45);
+  white-space: nowrap;
+}
+
+.usr-filters__select {
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.75rem;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  cursor: pointer;
+  padding-right: 0.1rem;
+}
+
+.usr-filters__select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.usr-filters__chevron {
+  color: rgba(237, 244, 255, 0.35);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* ── Table card ── */
+.usr-table-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.usr-table-wrap {
+  overflow-x: auto;
+}
+
+.usr-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.usr-table thead th {
+  font-size: 0.63rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: rgba(237, 244, 255, 0.3);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
+}
+
+.usr-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.12s;
+}
+
+.usr-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.usr-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.usr-table tbody td {
+  padding: 0.9rem 1rem;
+  font-size: 0.8rem;
+  color: rgba(237, 244, 255, 0.65);
+  vertical-align: middle;
+}
+
+/* ── User cell ── */
+.usr-table__user {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.usr-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.usr-table__email {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ── ID cell ── */
+.usr-table__id {
+  font-size: 0.75rem !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(237, 244, 255, 0.4) !important;
+}
+
+/* ── Responsible cell ── */
+.usr-table__responsible {
+  font-size: 0.75rem !important;
+  color: rgba(237, 244, 255, 0.4) !important;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Status badge ── */
+.usr-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.usr-badge--success {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--color-success);
+}
+
+.usr-badge--error {
+  background: rgba(255, 107, 107, 0.12);
+  color: var(--color-error);
+}
+
+.usr-badge--accent {
+  background: rgba(0, 229, 204, 0.12);
+  color: var(--color-accent);
+}
+
+.usr-badge--muted {
+  background: rgba(237, 244, 255, 0.05);
+  color: rgba(237, 244, 255, 0.3);
+}
+
+/* ── Empty / loading / error states ── */
+.usr-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  font-size: 0.82rem;
+  color: rgba(237, 244, 255, 0.35);
+}
+
+.usr-state--error {
+  color: var(--color-error);
+}
+
+.usr-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(0, 229, 204, 0.15);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: usr-spin 0.7s linear infinite;
+}
+
+@keyframes usr-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Pagination ── */
+.usr-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.usr-pagination__info {
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: rgba(237, 244, 255, 0.3);
+  text-transform: uppercase;
+}
+
+.usr-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.usr-pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 0.4rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: rgba(237, 244, 255, 0.5);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.usr-pagination__btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.usr-pagination__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.usr-pagination__btn--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-background);
+}
+
+.usr-pagination__btn--active:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: var(--color-background);
+}
+
+.usr-pagination__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  font-size: 0.78rem;
+  color: rgba(237, 244, 255, 0.25);
+}
+
+/* ── Inline row action buttons ── */
+.usr-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.usr-row-btn {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.usr-row-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.usr-row-btn--warning {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.25);
+  color: var(--color-warning);
+}
+
+.usr-row-btn--warning:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.usr-row-btn--success {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.25);
+  color: var(--color-success);
+}
+
+.usr-row-btn--success:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.usr-row-btn--danger {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.25);
+  color: var(--color-error);
+}
+
+.usr-row-btn--danger:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+/* ── Delete confirm dialog ── */
+.usr-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.usr-confirm {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: 1.75rem;
+  max-width: 380px;
+  width: 90%;
+}
+
+.usr-confirm__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.6rem;
+}
+
+.usr-confirm__body {
+  font-size: 0.82rem;
+  color: rgba(237, 244, 255, 0.55);
+  line-height: 1.55;
+  margin-bottom: 1.4rem;
+}
+
+.usr-confirm__body strong {
+  color: var(--color-text);
+}
+
+.usr-confirm__actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}
+
+.usr-confirm__btn {
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.usr-confirm__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.usr-confirm__btn--cancel {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(237, 244, 255, 0.7);
+}
+
+.usr-confirm__btn--cancel:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.usr-confirm__btn--danger {
+  background: var(--color-error);
+  color: #fff;
+}
+
+.usr-confirm__btn--danger:hover:not(:disabled) {
+  opacity: 0.88;
+}
