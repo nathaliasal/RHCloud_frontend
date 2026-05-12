@@ -48,6 +48,17 @@ const NAV_ITEMS = [
     ),
   },
   {
+    to: '/cargos',
+    label: 'Cargos',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 3 4 7v6c0 5 3.4 7.9 8 8 4.6-.1 8-3 8-8V7l-8-4Z" />
+        <path d="M9 11h6" />
+        <path d="M9 15h4" />
+      </svg>
+    ),
+  },
+  {
     to: '/contratos/plantillas',
     label: 'Plantillas de Contratos',
     icon: (

@@ -11,6 +11,7 @@ const Landing         = lazy(() => import('@/pages/Landing'))
 const Login           = lazy(() => import('@/pages/auth/Login'))
 const ResetPassword   = lazy(() => import('@/pages/auth/ResetPassword'))
 const CompleteProfile = lazy(() => import('@/pages/auth/CompleteProfile'))
+const Cargos          = lazy(() => import('@/pages/admin/Cargos'))
 const Dashboard       = lazy(() => import('@/pages/admin/Dashboard'))
 const Empresas        = lazy(() => import('@/pages/admin/Empresas'))
 const EmpresaDetalle  = lazy(() => import('@/pages/admin/EmpresaDetalle'))
@@ -60,6 +61,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <EmpresaDetalle />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/cargos',
+    element: (
+      <ProtectedRoute>
+        <Cargos />
       </ProtectedRoute>
     ),
   },
