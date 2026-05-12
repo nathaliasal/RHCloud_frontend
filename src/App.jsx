@@ -22,6 +22,7 @@ const Vacaciones      = lazy(() => import('@/pages/admin/Vacaciones'))
 const Usuarios             = lazy(() => import('@/pages/admin/Usuarios'))
 const UsuarioDetalle       = lazy(() => import('@/pages/admin/UsuarioDetalle'))
 const ContratosPlantillas  = lazy(() => import('@/pages/admin/ContratosPlantillas'))
+const Empleados            = lazy(() => import('@/pages/admin/Empleados'))
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -118,6 +119,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <UsuarioDetalle />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/empleados',
+    element: (
+      <ProtectedRoute>
+        <Empleados />
       </ProtectedRoute>
     ),
   },
