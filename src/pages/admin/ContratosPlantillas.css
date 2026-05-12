@@ -776,6 +776,11 @@
   gap: 0.38rem;
 }
 
+.cp-inc-item--template {
+  background: rgba(74, 222, 128, 0.04);
+  border-color: rgba(74, 222, 128, 0.18);
+}
+
 .cp-inc-item__top {
   display: flex;
   align-items: flex-start;

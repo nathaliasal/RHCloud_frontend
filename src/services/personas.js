@@ -7,5 +7,8 @@ export const getDocumentTypes = () =>
 export const getGenders = () =>
   http.get(API.PERSONS_GENDERS).then((r) => r.data)
 
+export const getPerson = (id) =>
+  http.get(`${API.PERSONS}${id}`).then((r) => r.data)
+
 export const createPerson = (body) =>
   http.post(API.PERSONS, body).then((r) => r.data)

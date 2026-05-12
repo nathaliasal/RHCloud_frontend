@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
+import { useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { AdminLayout } from '@/components/AdminLayout'
+import { getDashboardStats } from '@/services/dashboard'
+import { getNotifications } from '@/services/notificaciones'
 import './Dashboard.css'
 
-const STATS = [
+const STAT_META = [
   {
     id: 'empleados',
     label: 'Total Empleados',
-    value: '1,284',
-    badge: { text: '+12% ↑', type: 'success' },
+    key: 'total_employees',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -20,9 +23,9 @@ const STATS = [
   },
   {
     id: 'contratos',
-    label: 'Contratos Pendientes',
-    value: '42',
-    badge: { text: 'Urgente', type: 'warning' },
+    label: 'Contratos Activos',
+    key: 'total_active_contracts',
+    badge: { text: 'Activos', type: 'success' },
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -34,9 +37,9 @@ const STATS = [
   },
   {
     id: 'solicitudes',
-    label: 'Solicitudes Activas',
-    value: '156',
-    badge: { text: 'Hoy', type: 'accent' },
+    label: 'Solicitudes Pendientes',
+    key: 'total_pending_vacations_permissions',
+    badge: { text: 'Pendientes', type: 'warning' },
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
@@ -46,129 +49,54 @@ const STATS = [
   },
 ]
 
-const MONTHLY_DATA = [
-  { month: 'ENE', value: 72 },
-  { month: 'FEB', value: 88 },
-  { month: 'MAR', value: 110 },
-  { month: 'ABR', value: 95 },
-  { month: 'MAY', value: 118 },
-  { month: 'JUN', value: 104 },
-  { month: 'JUL', value: 130 },
-]
+function eventColor(eventType) {
+  const t = (eventType ?? '').toUpperCase()
+  if (t.includes('VACATION') || t.includes('VACACION')) return '#FBBF24'
+  if (t.includes('PERMISO') || t.includes('PERMISSION') || t.includes('LEAVE')) return '#00E5CC'
+  return '#A78BFA'
+}
 
-const ACTIVITY = [
-  {
-    id: 1,
-    initials: 'MR',
-    color: '#4ADE80',
-    text: (
-      <>
-        <strong>Marco Rossi</strong> firmó su{' '}
-        <span className="dash-activity__link">Contrato de Empleo</span>
-      </>
-    ),
-    time: 'HACE 2 MINUTOS',
-    dot: 'success',
-  },
-  {
-    id: 2,
-    initials: 'EV',
-    color: '#FBBF24',
-    text: (
-      <>
-        <strong>Elena Vance</strong> solicitó{' '}
-        <span className="dash-activity__link">3 días libres</span>
-      </>
-    ),
-    time: 'HACE 14 MINUTOS',
-    dot: 'warning',
-  },
-  {
-    id: 3,
-    initials: 'TS',
-    color: '#00E5CC',
-    text: (
-      <>
-        <strong>Nueva Empresa</strong> añadida:{' '}
-        <span className="dash-activity__link">TechSphere Global</span>
-      </>
-    ),
-    time: 'HACE 1 HORA',
-    dot: 'accent',
-  },
-  {
-    id: 4,
-    initials: 'SJ',
-    color: '#FF6B6B',
-    text: (
-      <>
-        <strong>Sarah Jenkins</strong> rechazó{' '}
-        <span className="dash-activity__link">actualización de permisos</span>
-      </>
-    ),
-    time: 'HACE 2 HORAS',
-    dot: 'error',
-  },
-]
+function eventInitials(eventType, title) {
+  if (eventType) {
+    const parts = eventType.split('_').filter(Boolean)
+    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase()
+    return parts[0].slice(0, 2).toUpperCase()
+  }
+  return (title ?? 'NT').slice(0, 2).toUpperCase()
+}
 
-const EMPLOYEES = [
-  {
-    id: 1,
-    initials: 'JD',
-    color: '#4ADE80',
-    name: 'Jane Doe',
-    email: 'jane.doe@techsphere.com',
-    department: 'Diseño de Producto',
-    status: 'ACTIVO',
-    statusType: 'success',
-    contract: 'Permanente Tiempo Completo',
-  },
-  {
-    id: 2,
-    initials: 'MK',
-    color: '#FBBF24',
-    name: 'Mike Knight',
-    email: 'mike.knight@techsphere.com',
-    department: 'Ingeniería',
-    status: 'DE VACACIONES',
-    statusType: 'warning',
-    contract: 'Contratista',
-  },
-  {
-    id: 3,
-    initials: 'AL',
-    color: '#00E5CC',
-    name: 'Ana López',
-    email: 'ana.lopez@techsphere.com',
-    department: 'Recursos Humanos',
-    status: 'ACTIVO',
-    statusType: 'success',
-    contract: 'Permanente Tiempo Completo',
-  },
-  {
-    id: 4,
-    initials: 'CR',
-    color: '#A78BFA',
-    name: 'Carlos Ruiz',
-    email: 'carlos.ruiz@techsphere.com',
-    department: 'Finanzas',
-    status: 'ACTIVO',
-    statusType: 'success',
-    contract: 'Medio Tiempo',
-  },
-]
+function relativeTime(value) {
+  if (!value) return ''
+  const diff = Date.now() - new Date(value).getTime()
+  const mins = Math.floor(diff / 60_000)
+  if (mins < 1) return 'HACE UN MOMENTO'
+  if (mins < 60) return `HACE ${mins} MIN`
+  const hours = Math.floor(mins / 60)
+  if (hours < 24) return `HACE ${hours} H`
+  const days = Math.floor(hours / 24)
+  return `HACE ${days} DÍA${days > 1 ? 'S' : ''}`
+}
 
 function LineChart({ data }) {
+  if (!data || data.length === 0) return null
+
   const W = 520
   const H = 160
   const PAD = { top: 16, right: 16, bottom: 28, left: 32 }
   const chartW = W - PAD.left - PAD.right
   const chartH = H - PAD.top - PAD.bottom
 
-  const max = Math.max(...data.map((d) => d.value))
-  const min = Math.min(...data.map((d) => d.value)) - 10
+  const values = data.map((d) => d.value)
+  const rawMax = Math.max(...values)
+  const rawMin = Math.min(...values)
+  const range = rawMax === rawMin ? 1 : rawMax - rawMin
+  const max = rawMax + range * 0.1
+  const min = rawMin - range * 0.1
 
-  const x = (i) => PAD.left + (i / (data.length - 1)) * chartW
+  const x = (i) =>
+    data.length === 1
+      ? PAD.left + chartW / 2
+      : PAD.left + (i / (data.length - 1)) * chartW
   const y = (v) => PAD.top + chartH - ((v - min) / (max - min)) * chartH
 
   const linePath = data
@@ -202,7 +130,14 @@ function LineChart({ data }) {
       ))}
 
       <path d={areaPath} fill="url(#chartGrad)" />
-      <path d={linePath} fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d={linePath}
+        fill="none"
+        stroke="var(--color-accent)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
 
       {data.map((d, i) => (
         <circle key={i} cx={x(i)} cy={y(d.value)} r="3.5" fill="var(--color-accent)" />
@@ -215,12 +150,10 @@ function LineChart({ data }) {
           y={H - 6}
           textAnchor="middle"
           fontSize="10"
-          fill="rgba(237,244,255,0.35)"
+          fill="rgba(237,244,255,0.5)"
           fontFamily="var(--font-primary)"
-          fontWeight={d.month === 'MAR' ? '700' : '400'}
-          fillOpacity={d.month === 'MAR' ? 1 : 0.7}
         >
-          {d.month}
+          {d.label}
         </text>
       ))}
     </svg>
@@ -230,11 +163,34 @@ function LineChart({ data }) {
 export default function Dashboard() {
   const [chartMode, setChartMode] = useState('mensual')
   const rootRef = useRef(null)
+  const navigate = useNavigate()
+
+  const { data: statsData, isLoading: statsLoading } = useQuery({
+    queryKey: ['dashboard-stats', chartMode],
+    queryFn: () => getDashboardStats(chartMode === 'semanal' ? { weekly: true } : {}),
+    staleTime: 5 * 60 * 1000,
+    retry: 1,
+  })
+
+  const { data: notiData, isLoading: notiLoading } = useQuery({
+    queryKey: ['notificaciones', { page: 1, page_size: 5 }],
+    queryFn: () => getNotifications({ page: 1, page_size: 5 }),
+    staleTime: 30_000,
+    retry: 1,
+    refetchInterval: 30_000,
+  })
+
+  const chartData = (statsData?.contracts_by_date ?? []).map((d) => ({
+    label: d.month_name,
+    value: d.contract_count,
+  }))
+
+  const activityItems = notiData?.items ?? []
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.dash-stat-card', { opacity: 0, y: 18, duration: 0.45, stagger: 0.08, ease: 'power3.out' })
-      gsap.from('.dash-row, .dash-table-card', { opacity: 0, y: 12, duration: 0.4, delay: 0.3, ease: 'power2.out' })
+      gsap.from('.dash-row', { opacity: 0, y: 12, duration: 0.4, delay: 0.3, ease: 'power2.out' })
     }, rootRef)
     return () => ctx.revert()
   }, [])
@@ -243,7 +199,7 @@ export default function Dashboard() {
     <AdminLayout>
       <div className="dashboard" ref={rootRef}>
         <div className="dash-stats">
-          {STATS.map((s) => (
+          {STAT_META.map((s) => (
             <div key={s.id} className="dash-stat-card">
               <div className="dash-stat-card__top">
                 <span className="dash-stat-card__icon">{s.icon}</span>
@@ -252,7 +208,9 @@ export default function Dashboard() {
                 )}
               </div>
               <p className="dash-stat-card__label">{s.label}</p>
-              <p className="dash-stat-card__value">{s.value}</p>
+              <p className="dash-stat-card__value">
+                {statsLoading ? '—' : (statsData?.[s.key] ?? 0).toLocaleString()}
+              </p>
             </div>
           ))}
         </div>
@@ -261,8 +219,8 @@ export default function Dashboard() {
           <div className="dash-chart-card">
             <div className="dash-chart-card__header">
               <div>
-                <h2 className="dash-chart-card__title">Contrataciones Mensuales</h2>
-                <p className="dash-chart-card__sub">Tendencias de empleo para el año fiscal actual</p>
+                <h2 className="dash-chart-card__title">Contrataciones por Período</h2>
+                <p className="dash-chart-card__sub">Contratos registrados en el período seleccionado</p>
               </div>
               <div className="dash-chart-toggle">
                 <button
@@ -280,88 +238,50 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="dash-chart__body">
-              <LineChart data={MONTHLY_DATA} />
+              {statsLoading ? (
+                <p className="dash-chart__loading">Cargando...</p>
+              ) : (
+                <LineChart data={chartData} />
+              )}
             </div>
           </div>
 
           <div className="dash-activity-card">
             <div className="dash-activity-card__header">
               <h2 className="dash-activity-card__title">Actividad Reciente</h2>
-              <button className="dash-activity-card__link">Ver Todo</button>
+              <button className="dash-activity-card__link" onClick={() => navigate('/notificaciones')}>
+                Ver Todo
+              </button>
             </div>
             <div className="dash-activity__list">
-              {ACTIVITY.map((item) => (
-                <div key={item.id} className="dash-activity__item">
-                  <div
-                    className="dash-activity__avatar"
-                    style={{ background: `${item.color}22`, color: item.color }}
-                  >
-                    {item.initials}
-                  </div>
-                  <div className="dash-activity__body">
-                    <p className="dash-activity__text">{item.text}</p>
-                    <span className="dash-activity__time">{item.time}</span>
-                  </div>
-                  <span className={`dash-activity__dot dash-activity__dot--${item.dot}`} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="dash-table-card">
-          <div className="dash-table-card__header">
-            <h2 className="dash-table-card__title">Resumen de Empleados Activos</h2>
-            <button className="dash-table-card__cta">+ Nuevo Empleado</button>
-          </div>
-          <div className="dash-table-wrap">
-            <table className="dash-table">
-              <thead>
-                <tr>
-                  <th>Empleado</th>
-                  <th>Departamento</th>
-                  <th>Estado</th>
-                  <th>Contrato</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {EMPLOYEES.map((emp) => (
-                  <tr key={emp.id}>
-                    <td>
-                      <div className="dash-table__employee">
-                        <div
-                          className="dash-table__emp-avatar"
-                          style={{ background: `${emp.color}22`, color: emp.color }}
-                        >
-                          {emp.initials}
-                        </div>
-                        <div>
-                          <span className="dash-table__emp-name">{emp.name}</span>
-                          <span className="dash-table__emp-email">{emp.email}</span>
-                        </div>
+              {notiLoading ? (
+                <p className="dash-chart__loading">Cargando...</p>
+              ) : activityItems.length === 0 ? (
+                <p className="dash-chart__loading">Sin notificaciones recientes.</p>
+              ) : (
+                activityItems.map((n) => {
+                  const color = eventColor(n.event_type)
+                  return (
+                    <div key={n.id} className="dash-activity__item">
+                      <div
+                        className="dash-activity__avatar"
+                        style={{ background: `${color}22`, color }}
+                      >
+                        {eventInitials(n.event_type, n.title)}
                       </div>
-                    </td>
-                    <td className="dash-table__dept">{emp.department}</td>
-                    <td>
-                      <span className={`dash-badge dash-badge--${emp.statusType}`}>
-                        {emp.status}
-                      </span>
-                    </td>
-                    <td className="dash-table__contract">{emp.contract}</td>
-                    <td>
-                      <button className="dash-table__action-btn" title="Opciones">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                          <circle cx="12" cy="5" r="1.5" />
-                          <circle cx="12" cy="12" r="1.5" />
-                          <circle cx="12" cy="19" r="1.5" />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      <div className="dash-activity__body">
+                        <p className="dash-activity__text">
+                          <strong>{n.title}</strong>
+                          {n.message && <> — <span className="dash-activity__link">{n.message}</span></>}
+                        </p>
+                        <span className="dash-activity__time">{relativeTime(n.created_at)}</span>
+                      </div>
+                      <span className={`dash-activity__dot dash-activity__dot--${n.is_read ? 'accent' : 'warning'}`} />
+                    </div>
+                  )
+                })
+              )}
+            </div>
           </div>
         </div>
       </div>
