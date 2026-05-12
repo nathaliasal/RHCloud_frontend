@@ -18,8 +18,9 @@ const MiPerfil        = lazy(() => import('@/pages/admin/MiPerfil'))
 const Notificaciones  = lazy(() => import('@/pages/admin/Notificaciones'))
 const Permisos        = lazy(() => import('@/pages/admin/Permisos'))
 const Vacaciones      = lazy(() => import('@/pages/admin/Vacaciones'))
-const Usuarios        = lazy(() => import('@/pages/admin/Usuarios'))
-const UsuarioDetalle  = lazy(() => import('@/pages/admin/UsuarioDetalle'))
+const Usuarios             = lazy(() => import('@/pages/admin/Usuarios'))
+const UsuarioDetalle       = lazy(() => import('@/pages/admin/UsuarioDetalle'))
+const ContratosPlantillas  = lazy(() => import('@/pages/admin/ContratosPlantillas'))
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -108,6 +109,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <UsuarioDetalle />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/contratos/plantillas',
+    element: (
+      <ProtectedRoute>
+        <ContratosPlantillas />
       </ProtectedRoute>
     ),
   },
