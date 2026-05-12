@@ -12,10 +12,8 @@ RUN npm run build
 FROM nginx:alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx.template /etc/nginx/nginx.template
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+
+# La imagen nginx procesa /etc/nginx/templates/*.conf.template con envsubst al arrancar
+COPY nginx.template /etc/nginx/templates/default.conf.template
 
 EXPOSE 80
-
-ENTRYPOINT ["/docker-entrypoint.sh"]

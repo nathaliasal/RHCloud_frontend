@@ -5,3 +5,4 @@ dist
 *.local
 *.log
 README.md
+docker-entrypoint.sh
